@@ -13,6 +13,7 @@
  */
 int _printf(const char *format, ...)
 {
+:wq
 	int  i = 0, k = 0;
 	int n_displayed = 0;
 	char *str = NULL;
