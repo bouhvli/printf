@@ -1,26 +1,24 @@
 #ifndef MAIN_H
 #define MAIN_H
+#include <stdio.h>
 #include <stdarg.h>
-#ifndef MAIN_H
-#define MAIN_H
-#include <stdarg.h>
-
-
-int _putchar(char c);
+/**
+ * struct specifier - struct specifier
+ * @valid: the valid character.
+ * @f: the functions associated.
+ *
+ */
+typedef struct specifier
+{
+        char *valid;
+        int (*f)(va_list);
+} spec;
 int _printf(const char *format, ...);
-int _print_char(va_list args);
-int _print_int(va_list args);
-int _print_str(va_list args);
-int (*_selec_func(char c))(va_list);
-
-#endif
-
-
+int print_c(va_list args);
+int print_s(va_list args);
+int print_d(va_list args);
+int print_i(va_list args);
 int _putchar(char c);
-int _printf(const char *format, ...);
-int _print_char(va_list args);
-int _print_int(va_list args);
-int _print_str(va_list args);
-int (*_selec_func(char c))(va_list);
-
+int print_percent(va_list args);
+int (*get_func(char x))(va_list args);
 #endif
