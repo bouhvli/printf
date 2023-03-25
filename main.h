@@ -1,8 +1,7 @@
-# printf
+# 0x11. C - printf
 Team Task
 Group Project
 
-vi main.h
 #ifndef MAIN_H
 #define MAIN_H
 #include <stdarg.h>
