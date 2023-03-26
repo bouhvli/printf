@@ -43,12 +43,12 @@ int print_b(va_list args)
 	return (count);
 }
 /**
- * print_HX - prints a converted number to hexa
+ * print_HEX - prints a converted number to hexa
  * in upper case letters
  * @args: character argument
  * Return: number of characters
  */
-int printf_HEX(va_list args)
+int print_HEX(va_list args)
 {
 	unsigned int num, digit, temp;
 	int counter = 0;
@@ -69,14 +69,15 @@ int printf_HEX(va_list args)
 		else
 			_putchar(digit + '0');
 	}
-	return counter;
-}/**
+	return (counter);
+}
+/**
  * print_hex - prints a converted number to hexa
  * in lower case letters
  * @args: character argument
  * Return: number of characters
  */
-int printf_hex(va_list args)
+int print_hex(va_list args)
 {
 	unsigned int num, digit, temp;
 	int counter = 0;
@@ -97,5 +98,38 @@ int printf_hex(va_list args)
 		else
 			_putchar(digit + '0');
 	}
-	return counter;
+	return (counter);
 }
+/**
+ * print_oct - prints a converted number to octal
+ * @args: character argument
+ * Return: number of characters
+ */
+int print_oct(va_list args)
+{
+	unsigned int temp, num;
+	int counter = 0;
+
+	num = va_arg(args, unsigned int);
+	temp = num;
+	while (temp != 0)
+	{
+		counter++;
+		temp >>= 3;
+	}
+	if (counter == 0)
+	{
+		_putchar('0');
+		counter++;
+	}
+	else
+	{
+		while (counter > 0)
+		{
+			counter--;
+			_putchar((num >> (counter * 3)) & 0x7 + '0');
+		}
+	}
+	return (counter);
+}
+
