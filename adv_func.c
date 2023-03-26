@@ -13,11 +13,6 @@ int print_b(va_list args)
 
 	val = va_arg(args, unsigned int);
 	count = 0;
-	if (val == 0)
-	{
-		_putchar('0');
-		return (count++);
-	}
 	for (i = 0; val > 0; i++)
 	{
 		binnum[i] = val % 2;
