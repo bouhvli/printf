@@ -9,11 +9,9 @@ int (*get_func(char x))(va_list)
 {
 	int i = 0;
 	spec arr[] = {
-		{"c", print_c},
-		{"s", print_s},
-		{"%", print_percent},
-		{"d", print_d},
-		{"i", print_i},
+		{"c", print_c}, {"s", print_s},
+		{"%", print_percent}, {"d", print_d},
+		{"i", print_i}, {"b", print_b},
 		{NULL, NULL}
 	};
 	while (arr[i].valid)
