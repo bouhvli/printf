@@ -42,3 +42,60 @@ int print_b(va_list args)
 	}
 	return (count);
 }
+/**
+ * print_HX - prints a converted number to hexa
+ * in upper case letters
+ * @args: character argument
+ * Return: number of characters
+ */
+int printf_HEX(va_list args)
+{
+	unsigned int num, digit, temp;
+	int counter = 0;
+
+	num = va_arg(args, unsigned int);
+	temp = num;
+	while (temp != 0)
+	{
+	counter++;
+	temp >>= 4;
+	}
+	while (counter > 0)
+	{
+		counter--;
+		digit = (num >> (counter * 4)) & 0xf;
+		if (digit > 9)
+			_putchar(digit + 'A' - 10);
+		else
+			_putchar(digit + '0');
+	}
+	return counter;
+}/**
+ * print_hex - prints a converted number to hexa
+ * in lower case letters
+ * @args: character argument
+ * Return: number of characters
+ */
+int printf_hex(va_list args)
+{
+	unsigned int num, digit, temp;
+	int counter = 0;
+
+	num = va_arg(args, unsigned int);
+	temp = num;
+	while (temp != 0)
+	{
+	counter++;
+	temp >>= 4;
+	}
+	while (counter > 0)
+	{
+		counter--;
+		digit = (num >> (counter * 4)) & 0xf;
+		if (digit > 9)
+			_putchar(digit + 'a' - 10);
+		else
+			_putchar(digit + '0');
+	}
+	return counter;
+}
