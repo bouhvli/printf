@@ -140,23 +140,33 @@ int print_oct(va_list args)
 int print_uns(va_list args)
 {
 	unsigned int n;
-	int digit, counter;
+	unsigned int num;
+	int digit, exp;
+	int  counter;
 
-	counter = 0;
 	n = va_arg(args, unsigned int);
-	if (n == 0)
+	num = n;
+	exp = 1;
+	counter = 0;
+	while (num / 10 != 0)
 	{
-		_putchar('0');
-		return (1);
+		exp *= 10;
+		num /= 10;
 	}
 
-	while (n != 0)
+	num = n;
+	while (exp > 1)
 	{
-		digit = n % 10;
+		digit = num / exp;
 		_putchar(digit + '0');
-		n /= 10;
+		num -= digit * exp;
+		exp /= 10;
 		counter++;
 	}
+
+	_putchar(num % 10 + '0');
+	counter++;
+
 	return (counter);
 }
 
