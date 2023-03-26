@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdarg.h>
 #include "main.h"
 /**
@@ -13,6 +14,8 @@ int print_b(va_list args)
 
 	val = va_arg(args, unsigned int);
 	count = 0;
+	if (val == NULL)
+		return (0);
 	for (i = 0; val > 0; i++)
 	{
 		binnum[i] = val % 2;
