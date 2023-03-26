@@ -8,14 +8,14 @@
  */
 int print_b(va_list args)
 {
-        int val, j, i;
-	int count, binnum[32];
+	unsigned int val, binnum[32];
+	int count, j, i;
 
-        val = va_arg(args, int);
+	val = va_arg(args, unsigned int);
 	count = 0;
 	if (val == 0)
 	{
-		_putchar(0);
+		_putchar('0');
 		return (count++);
 	}
 	for (i = 0; val > 0; i++)
@@ -28,5 +28,5 @@ int print_b(va_list args)
 		_putchar(binnum[j] + '0');
 		count++;
 	}
-        return (count);
+	return (count);
 }
