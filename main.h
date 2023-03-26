@@ -22,6 +22,7 @@ int print_b(va_list args);
 int print_hex(va_list args);
 int print_HEX(va_list args);
 int print_oct(va_list args);
+int print_uns(va_list args);
 int _putchar(char c);
 int print_percent(va_list args);
 int (*get_func(char x))(va_list args);

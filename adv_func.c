@@ -132,4 +132,31 @@ int print_oct(va_list args)
 	}
 	return (counter);
 }
+/**
+ * print_uns - prints unsigned integer
+ * @args: argument to print
+ * Return: number of characters printed
+ */
+int print_uns(va_list args)
+{
+	unsigned int n;
+	int digit, counter;
+
+	counter = 0;
+	n = va_arg(args, unsigned int);
+	if (n == 0)
+	{
+		_putchar('0');
+		return (1);
+	}
+
+	while (n != 0)
+	{
+		digit = n % 10;
+		_putchar(digit + '0');
+		n /= 10;
+		counter++;
+	}
+	return (counter);
+}
 
