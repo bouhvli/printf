@@ -127,7 +127,7 @@ int print_oct(va_list args)
 		while (counter > 0)
 		{
 			counter--;
-			_putchar((num >> (counter * 3)) & 0x7 + '0');
+			_putchar(((num >> (counter * 3)) & 0x7) + '0');
 		}
 	}
 	return (counter);
