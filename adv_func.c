@@ -12,7 +12,7 @@ int print_b(va_list args)
 	int flag = 0;
 	int cont = 0;
 	int i, a = 1, b;
-	unsigned int num = va_arg(val, unsigned int);
+	unsigned int num = va_arg(args, unsigned int);
 	unsigned int p;
 
 	for (i = 0; i < 32; i++)
@@ -45,7 +45,7 @@ int print_HEX(va_list args)
 	int i;
 	int *array;
 	int counter = 0;
-	unsigned int num = va_arg(val, unsigned int);
+	unsigned int num = va_arg(args, unsigned int);
 	unsigned int temp = num;
 
 	while (num / 16 != 0)
@@ -81,7 +81,7 @@ int print_hex(va_list args)
 	int i;
 	int *array;
 	int counter = 0;
-	unsigned int num = va_arg(val, unsigned int);
+	unsigned int num = va_arg(args, unsigned int);
 	unsigned int temp = num;
 
 	while (num / 16 != 0)
@@ -116,7 +116,7 @@ int print_oct(va_list args)
 	int i;
 	int *array;
 	int counter = 0;
-	unsigned int num = va_arg(val, unsigned int);
+	unsigned int num = va_arg(args, unsigned int);
 	unsigned int temp = num;
 
 	while (num / 8 != 0)
