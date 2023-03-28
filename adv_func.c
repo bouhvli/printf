@@ -9,38 +9,30 @@
  */
 int print_b(va_list args)
 {
-	unsigned int num;
-	int count = 0;
-	int highest_bit, i, bit;
+	int flag = 0;
+	int cont = 0;
+	int i, a = 1, b;
+	unsigned int num = va_arg(val, unsigned int);
+	unsigned int p;
 
-	num = va_arg(args, unsigned int);
-	if (num == 0)
+	for (i = 0; i < 32; i++)
 	{
-		_putchar('0');
-		count++;
-	}
-	else
-	{
-		/**
-		 * Determine the highest non-zero
-		 * bit in the input number
-		 */
-		highest_bit = 31;
-		while (((num >> highest_bit) & 1) == 0 && highest_bit > 0)
-			highest_bit--;
-
-		/**
-		 * Print the binary representation
-		 * of the input number
-		 */
-		for (i = highest_bit; i >= 0; i--)
+		p = ((a << (31 - i)) & num);
+		if (p >> (31 - i))
+			flag = 1;
+		if (flag)
 		{
-			bit = (num >> i) & 1;
-			_putchar(bit + '0');
-			count++;
+			b = p >> (31 - i);
+			_putchar(b + 48);
+			cont++;
 		}
 	}
-	return (count);
+	if (cont == 0)
+	{
+		cont++;
+		_putchar('0');
+	}
+	return (cont);
 }
 /**
  * print_HEX - prints a converted number to hexa
@@ -50,25 +42,32 @@ int print_b(va_list args)
  */
 int print_HEX(va_list args)
 {
-	unsigned int num, digit, temp;
+	int i;
+	int *array;
 	int counter = 0;
+	unsigned int num = va_arg(val, unsigned int);
+	unsigned int temp = num;
 
-	num = va_arg(args, unsigned int);
-	temp = num;
-	while (temp != 0)
+	while (num / 16 != 0)
 	{
+		num /= 16;
+		counter++;
+	}
 	counter++;
-	temp >>= 4;
-	}
-	while (counter > 0)
+	array = malloc(counter * sizeof(int));
+
+	for (i = 0; i < counter; i++)
 	{
-		counter--;
-		digit = (num >> (counter * 4)) & 0xf;
-		if (digit > 9)
-			_putchar(digit + 'A' - 10);
-		else
-			_putchar(digit + '0');
+		array[i] = temp % 16;
+		temp /= 16;
 	}
+	for (i = counter - 1; i >= 0; i--)
+	{
+		if (array[i] > 9)
+			array[i] = array[i] + 7;
+		_putchar(array[i] + '0');
+	}
+	free(array);
 	return (counter);
 }
 /**
@@ -79,25 +78,32 @@ int print_HEX(va_list args)
  */
 int print_hex(va_list args)
 {
-	unsigned int num, digit, temp;
+	int i;
+	int *array;
 	int counter = 0;
+	unsigned int num = va_arg(val, unsigned int);
+	unsigned int temp = num;
 
-	num = va_arg(args, unsigned int);
-	temp = num;
-	while (temp != 0)
+	while (num / 16 != 0)
 	{
+		num /= 16;
+		counter++;
+	}
 	counter++;
-	temp >>= 4;
-	}
-	while (counter > 0)
+	array = malloc(counter * sizeof(int));
+
+	for (i = 0; i < counter; i++)
 	{
-		counter--;
-		digit = (num >> (counter * 4)) & 0xf;
-		if (digit > 9)
-			_putchar(digit + 'a' - 10);
-		else
-			_putchar(digit + '0');
+		array[i] = temp % 16;
+		temp /= 16;
 	}
+	for (i = counter - 1; i >= 0; i--)
+	{
+		if (array[i] > 9)
+			array[i] = array[i] + 39;
+		_putchar(array[i] + '0');
+	}
+	free(array);
 	return (counter);
 }
 /**
@@ -107,29 +113,30 @@ int print_hex(va_list args)
  */
 int print_oct(va_list args)
 {
-	unsigned int temp, num;
+	int i;
+	int *array;
 	int counter = 0;
+	unsigned int num = va_arg(val, unsigned int);
+	unsigned int temp = num;
 
-	num = va_arg(args, unsigned int);
-	temp = num;
-	while (temp != 0)
+	while (num / 8 != 0)
 	{
-		counter++;
-		temp >>= 3;
-	}
-	if (counter == 0)
-	{
-		_putchar('0');
+		num /= 8;
 		counter++;
 	}
-	else
+	counter++;
+	array = malloc(counter * sizeof(int));
+
+	for (i = 0; i < counter; i++)
 	{
-		while (counter > 0)
-		{
-			counter--;
-			_putchar(((num >> (counter * 3)) & 0x7) + '0');
-		}
+		array[i] = temp % 8;
+		temp /= 8;
 	}
+	for (i = counter - 1; i >= 0; i--)
+	{
+		_putchar(array[i] + '0');
+	}
+	free(array);
 	return (counter);
 }
 /**
@@ -139,34 +146,40 @@ int print_oct(va_list args)
  */
 int print_uns(va_list args)
 {
-	unsigned int n;
-	unsigned int num;
-	int digit, exp;
-	int  counter;
+	unsigned int n = va_arg(args, unsigned int);
+	int num, last = n % 10, digit, exp = 1;
+	int  i = 1;
 
-	n = va_arg(args, unsigned int);
+	n = n / 10;
 	num = n;
-	exp = 1;
-	counter = 0;
-	while (num / 10 != 0)
+
+	if (last < 0)
 	{
-		exp *= 10;
-		num /= 10;
+		_putchar('-');
+		num = -num;
+		n = -n;
+		last = -last;
+		i++;
 	}
-
-	num = n;
-	while (exp > 1)
+	if (num > 0)
 	{
-		digit = num / exp;
-		_putchar(digit + '0');
-		num -= digit * exp;
-		exp /= 10;
-		counter++;
+		while (num / 10 != 0)
+		{
+			exp = exp * 10;
+			num = num / 10;
+		}
+		num = n;
+		while (exp > 0)
+		{
+			digit = num / exp;
+			_putchar(digit + '0');
+			num = num - (digit * exp);
+			exp = exp / 10;
+			i++;
+		}
 	}
+	_putchar(last + '0');
 
-	_putchar(num % 10 + '0');
-	counter++;
-
-	return (counter);
+	return (i);
 }
 
