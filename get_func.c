@@ -2,10 +2,10 @@
 #include <stddef.h>
 /**
  * get_func - look for the specifier
- * @x: variable to the function
+ * @s: variable for the function
  * Return: function
  */
-int (*get_func(char x))(va_list)
+int (*get_func(char s))(va_list)
 {
 	int i = 0;
 	spec arr[] = {
@@ -16,8 +16,8 @@ int (*get_func(char x))(va_list)
 	};
 	while (arr[i].valid)
 	{
-		if (x == arr[i].valid[0])
-			return (arr[i].f);
+		if (s == arr[i].valid[0])
+			return (arr[i].funk);
 		i++;
 	}
 	return (NULL);
