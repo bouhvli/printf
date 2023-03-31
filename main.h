@@ -4,8 +4,8 @@
 #include <stdarg.h>
 /**
  * struct specifier - struct specifier
- * @valid: the valid character.
- * @f: the functions associated.
+ * @valid: the wanted character.
+ * @f: the functions related.
  *
  */
 typedef struct specifier
